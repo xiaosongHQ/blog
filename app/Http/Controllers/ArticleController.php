@@ -18,7 +18,7 @@ class ArticleController extends Controller
     public function index()
     {
         
-        $articles = Article::orderBy('id','asc')
+        $articles = Article::orderBy('id','desc')
             ->where('content','like', '%'.request()->key.'%')
             ->paginate(8);
         return view('/article/list',['articles'=>$articles]);
@@ -45,7 +45,7 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        
+        // dd(request()->all());
         $articles = new Article;
         $articles -> name = request() -> name;
         $articles -> join = request() -> join;
@@ -55,8 +55,6 @@ class ArticleController extends Controller
         $articles -> user_id = 1;
         if($request->hasFile('img')){
             $articles -> img = '/'.request()->img->store('uploads/'.date('Ymd'));
-        }else{
-            return back()->with('false','必须上传图片');
         }
         DB::beginTransaction();//开启事务
         if($articles->save()){
@@ -66,7 +64,6 @@ class ArticleController extends Controller
                 return redirect('/article')->with('true','添加成功');
             }catch(\Exception $e){
                 DB::rollback();//回滚事务
-                dd($e);
                 return back()->with('false','添加失败!');
             }
         }else{
@@ -120,8 +117,6 @@ class ArticleController extends Controller
         $articles -> user_id = 1;
         if($request->hasFile('img')){
             $articles -> img = '/'.request()->img->store('uploads/'.date('Ymd'));
-        }else{
-            return back()->with('false','必须上传图片');
         }
         DB::beginTransaction();//开启事务
 

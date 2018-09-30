@@ -25,7 +25,7 @@
       <li style="cursor:pointer"><a href="/">网站首页</a></li>
       <li style="cursor:pointer"><a href="/home/me">关于我</a></li>
       <li style="cursor:pointer"><a href="/home/article_list" >文章列表</a></li>
-      <li id='ym' style="cursor:pointer">YM专区</li>
+      <li id='ym' style="cursor:pointer"><a href="/home/riji">我的日记</a></li>
       
     </ul>
 </nav>

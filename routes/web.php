@@ -15,6 +15,7 @@ Route::get('/','HomeController@index');
 Route::get('/home/me','HomeController@me');
 Route::get('/home/article_list','HomeController@article_list');
 Route::get('/home/{id}.html','HomeController@show');
+Route::resource('/home/riji','RijiController');
 
 
 Route::get('/admin/login', 'AdminController@login');

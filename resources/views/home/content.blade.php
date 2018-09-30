@@ -42,7 +42,7 @@
           <a href="/home/article_list?tag_id={{$v->id}}">{{$v->name}}</a> &nbsp;
           @endforeach
         </div>
-        <div class="news_about">
+        <div style="background:#eee;" class="news_about">
           {!!$articles->content!!}
           <br>
           &nbsp; </div>

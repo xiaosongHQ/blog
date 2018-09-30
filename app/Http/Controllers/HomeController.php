@@ -15,7 +15,7 @@ class HomeController extends Controller
     	$sets = Set::findOrFail(1);
     	$cates = Cate::all();
     	$links = Link::all();
-    	$articles = Article::take(7)->get();
+    	$articles = Article::orderBy('id','desc')->take(7)->get();
     	return view('/home/index',compact('sets','links','cates','articles'));
     }
     public function me(){
@@ -28,14 +28,14 @@ class HomeController extends Controller
     	$sets = Set::findOrFail(1);
     	$cates = Cate::all();
     	$links = Link::all();
-    	$articles = Article::where('content','like','%'.request()->key.'%')->paginate(7);
+    	$articles = Article::orderBy('id','desc')->where('content','like','%'.request()->key.'%')->paginate(7);
     	if(!empty(request()->tag_id)){
             $tag = Tag::findOrFail(request()->tag_id);
             $articles = $tag->articles()->paginate(7);
         }
         if(!empty(request()->cate_id)){
             $cate = Cate::findOrFail(request()->cate_id);
-            $articles = $cate->articles()->paginate(7);
+            $articles = $cate->articles()->orderBy('id','desc')->paginate(7);
         }
     	return view('/home/article_list',compact('sets','links','cates','articles'));
     }

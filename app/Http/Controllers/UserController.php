@@ -84,7 +84,7 @@ class UserController extends Controller
         $users = User::findOrFail($id);
         $users -> name = $request -> name;
         $users -> email = $request -> email;
-        $users -> password = $request -> password;
+        $users -> password = Hash::make($request->password);
         if($users->save()){
             return redirect('/user')->with('true','更新成功');
         }else{

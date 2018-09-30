@@ -1,6 +1,7 @@
 @extends('layouts.admin')
 @section('content')
 <script type="text/javascript" charset="utf-8" src="/ueditor/ueditor.config.js"></script>
+<script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
 <script type="text/javascript" charset="utf-8" src="/ueditor/ueditor.all.min.js"> </script>
 <script type="text/javascript" charset="utf-8" src="/ueditor/lang/zh-cn/zh-cn.js"></script>
 <div class="tpl-portlet-components">
@@ -66,7 +67,7 @@
                                 <div class="am-form-group">
                                     <label for="user-name" class="am-u-sm-3 am-form-label">文章主图</label>
                                     <div class="am-u-sm-9" style="font-size:14px;">
-                                        <input type="file" id="user-name" name="img">
+                                        <input type="file" id="image" name="img">
                                     </div>
                                 </div>
 
@@ -79,7 +80,7 @@
 
                                 <div class="am-form-group">
                                     <div class="am-u-sm-9 am-u-sm-push-3">
-                                        <button class="am-btn am-btn-primary">发布</button>
+                                        <button type="submit" name="submit" class="am-btn am-btn-primary">发布</button>
                                     </div>
                                 </div>
                                 {{csrf_field()}}
@@ -91,5 +92,13 @@
             </div>
              <script>
                     var ue = UE.getEditor('editor');
+                $(function(){
+                    $('form').submit(function(){
+                        if(!$('#image').val()){
+                            alert('请上传图片');
+                            return false;
+                        }
+                    });
+                });
                 </script>
 @endsection
